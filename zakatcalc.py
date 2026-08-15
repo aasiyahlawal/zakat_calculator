@@ -1,0 +1,96 @@
+#Zakat Calculator
+
+print("Welcome to the Zakat Calculator")
+sum = 0
+
+#Notes
+#Later ... will add the option to do different currencies
+#Get API - MetalPriceAPI and link it to program
+#Create functions
+
+#Pseudocode
+# zakatable_items = [cash, gold, silver, etc]
+#for items in zakatable_items:
+#   input("Please enter total amount of ", item "you have")
+#       blah blah blah, do stuff
+#   if zakatable_items[items] == gold || silver
+#       create a loop to check if it meets nisab value
+
+#Cash & Savings
+def cash_savings():
+    global sum
+    cashsav = int(input("Please enter total amount of cash and savings you have: "))    
+    sum += cashsav
+
+#Gold and silver
+def gold():
+    global sum
+    gold = int(input("Please enter total pure gold weight you own: "))
+    nisab_gold = 87.48 #possible just use the nisab gold value, to reduce number of variables
+    while True:
+        if (gold < nisab_gold):
+            print("Your gold is not zakat taxable!")
+            break
+        else:
+            sum += gold
+            break
+
+#Silver
+def silver():
+    global sum
+    silver = int(input("Please enter total grams of silver weight you own: "))
+    while True:
+        if (silver < 612.36):
+            print("Your silver is not zakat taxable")
+            break
+        else:
+            sum += silver
+            break
+
+#Investments and stocks
+def investments():
+    global sum
+    invest = int(input("Please enter total cash value of investment and stocks held by you: "))
+    sum += invest
+
+#Business Assets
+def assets():
+    global sum
+    assets = int(input("Please enter business assets owned by you: "))
+    sum += assets
+
+#IOU (Money owed to u)
+def iou():
+    global sum
+    iou = int(input("Please enter total amount owed to you: "))
+    sum += iou
+
+# Agric produce & livestock
+def agric():
+    #write
+    pass
+
+# Money u owe
+def owing():
+    global sum
+    owing = int(input("How much money are you owing: "))
+    sum -= owing
+
+#Calculate zakat amount eg 2.5%
+def zakat_payable():
+    #write
+    pass
+
+
+#Run
+cash_savings()
+gold()
+silver()
+investments()
+assets()
+iou()
+agric()
+owing()
+
+#Program handling
+print("Total amount you have is: ", sum)
