@@ -76,9 +76,20 @@ def owing():
     owing = int(input("How much money are you owing: "))
     sum -= owing
 
+#Hanafi madhab - nisab market value of silver
+def surplus_wealth():
+    global sum
+    nisab_silver = 941.29 #nisab_silver changes
+    if (sum >= nisab_silver):
+       zakat_payable(sum)
+    else:
+        print("The total amount of wealth you have is NOT Zakat payable")
+
 #Calculate zakat amount eg 2.5%
-def zakat_payable():
-    #write
+def zakat_payable(sum):
+    #zakat_pay = 2.5% * sum
+    zakat_pay = sum * 0.025 
+    print("The amount of Zakat due for you to pay ", zakat_pay)
     pass
 
 
@@ -94,3 +105,5 @@ owing()
 
 #Program handling
 print("Total amount you have is: ", sum)
+
+surplus_wealth()
