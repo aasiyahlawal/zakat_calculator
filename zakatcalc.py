@@ -6,7 +6,7 @@ sum = 0
 #Notes
 #Later ... will add the option to do different currencies
 #Get API - MetalPriceAPI and link it to program
-#Create functions
+#If someone does not own any assets except from Gold, then the nisab value of gold must be used
 
 #Pseudocode
 # zakatable_items = [cash, gold, silver, etc]
@@ -16,24 +16,13 @@ sum = 0
 #   if zakatable_items[items] == gold || silver
 #       create a loop to check if it meets nisab value
 
+
 #Cash & Savings
 def cash_savings():
     global sum
     cashsav = int(input("Please enter total amount of cash and savings you have: "))    
     sum += cashsav
-
-#Gold and silver
-def gold():
-    global sum
-    gold = int(input("Please enter total pure gold weight you own: "))
-    nisab_gold = 87.48 #possible just use the nisab gold value, to reduce number of variables
-    while True:
-        if (gold < nisab_gold):
-            print("Your gold is not zakat taxable!")
-            break
-        else:
-            sum += gold
-            break
+        
 
 #Silver
 def silver():
@@ -75,6 +64,37 @@ def owing():
     global sum
     owing = int(input("How much money are you owing: "))
     sum -= owing
+
+#Gold and silver
+def gold():
+    global sum
+    gold = int(input("Please enter total pure gold weight you own: "))
+    nisab_gold = 87.48 #possible just use the nisab gold value, to reduce number of variables
+    while True:
+        if (gold < nisab_gold):
+            print("Your gold is not zakat taxable!")
+            break
+        else:
+            sum += gold
+            break
+        
+#Updated Gold function
+def gold_to_cash():
+    global sum
+    gold = input("Please enter total pure gold weight you own in grams: ")
+    nisab_gold = 87.48 
+    while True:
+        if (gold < nisab_gold and sum == 0):
+            print("Your gold is not zakat taxable!")
+            break
+        elif (gold < nisab_gold and sum == 0):
+            #call function nisab_gold()
+    cashvalue_gold = gold * 104.28 #Later adapt value e.g (104.28) based on carat value of gold
+
+#If gold is the only asset
+def nisab_gold():
+    break
+
 
 #Hanafi madhab - nisab market value of silver
 def surplus_wealth():
