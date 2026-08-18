@@ -8,15 +8,6 @@ sum = 0
 #Get API - MetalPriceAPI and link it to program
 #If someone does not own any assets except from Gold, then the nisab value of gold must be used
 
-#Pseudocode
-# zakatable_items = [cash, gold, silver, etc]
-#for items in zakatable_items:
-#   input("Please enter total amount of ", item "you have")
-#       blah blah blah, do stuff
-#   if zakatable_items[items] == gold || silver
-#       create a loop to check if it meets nisab value
-
-
 #Cash & Savings
 def cash_savings():
     global sum
@@ -66,34 +57,46 @@ def owing():
     sum -= owing
 
 #Gold and silver
-def gold():
-    global sum
-    gold = int(input("Please enter total pure gold weight you own: "))
-    nisab_gold = 87.48 #possible just use the nisab gold value, to reduce number of variables
-    while True:
-        if (gold < nisab_gold):
-            print("Your gold is not zakat taxable!")
-            break
-        else:
-            sum += gold
-            break
+#def gold():
+ #   global sum
+  #  gold = int(input("Please enter total pure gold weight you own: "))
+    #nisab_gold = 87.48 #possible just use the nisab gold value, to reduce number of variables
+   # while True:
+     #   if (gold < nisab_gold):
+      #      print("Your gold is not zakat taxable!")
+       #     break
+        #else:
+         #   sum += gold
+          #  break
         
 #Updated Gold function
 def gold_to_cash():
     global sum
-    gold = input("Please enter total pure gold weight you own in grams: ")
-    nisab_gold = 87.48 
+    gold = float(input("Please enter total pure gold weight you own in grams: "))
+    nisab_gold = 87.48
+    
     while True:
         if (gold < nisab_gold and sum == 0):
             print("Your gold is not zakat taxable!")
             break
-        elif (gold < nisab_gold and sum == 0):
-            #call function nisab_gold()
+        
+        elif (gold >= nisab_gold and sum == 0):
+            cashvalue_gold = gold * 104.28
+            loneasset_gold(cashvalue_gold)
+            break
+        else:
+            break
+            
     cashvalue_gold = gold * 104.28 #Later adapt value e.g (104.28) based on carat value of gold
+    sum += cashvalue_gold
+    
 
 #If gold is the only asset
-def nisab_gold():
-    break
+def loneasset_gold(cashvalue_gold):
+    while True:
+        if (cashvalue_gold >= 9098.07):
+            zakat_payable(cashvalue_gold)
+            break
 
 
 #Hanafi madhab - nisab market value of silver
@@ -107,23 +110,25 @@ def surplus_wealth():
 
 #Calculate zakat amount eg 2.5%
 def zakat_payable(sum):
-    #zakat_pay = 2.5% * sum
     zakat_pay = sum * 0.025 
-    print("The amount of Zakat due for you to pay ", zakat_pay)
+    print("The amount of Zakat due for you to pay is ", round(zakat_pay))
     pass
+    
+    
 
 
 #Run
-cash_savings()
-gold()
-silver()
-investments()
+#cash_savings()
+##gold()
+#silver()
+#investments()
 assets()
 iou()
 agric()
 owing()
+gold_to_cash()
 
 #Program handling
-print("Total amount you have is: ", sum)
+print("Total amount you have is: ", round(sum, 2))
 
 surplus_wealth()
