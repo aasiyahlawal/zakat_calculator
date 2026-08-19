@@ -46,28 +46,24 @@ def iou():
     sum += iou
 
 # Agric produce & livestock
-def agric():
-    #write
-    pass
-
+def crops():
+    global sum
+    harvest = int(input("Please enter total amount of harvest yielded in kg: "))
+    while True:
+        if (harvest >= 612):
+            agric_zakat(harvest)
+            break
+        elif (harvest < 612):
+           print("Your crops are not Zakat eligible")
+           break
+        else:
+            break
+        
 # Money u owe
 def owing():
     global sum
     owing = int(input("How much money are you owing: "))
     sum -= owing
-
-#Gold and silver
-#def gold():
- #   global sum
-  #  gold = int(input("Please enter total pure gold weight you own: "))
-    #nisab_gold = 87.48 #possible just use the nisab gold value, to reduce number of variables
-   # while True:
-     #   if (gold < nisab_gold):
-      #      print("Your gold is not zakat taxable!")
-       #     break
-        #else:
-         #   sum += gold
-          #  break
         
 #Updated Gold function
 def gold_to_cash():
@@ -81,20 +77,21 @@ def gold_to_cash():
             break
         
         elif (gold >= nisab_gold and sum == 0):
-            cashvalue_gold = gold * 104.28
+            cashvalue_gold = gold * 105.27
             loneasset_gold(cashvalue_gold)
             break
+        
         else:
             break
             
-    cashvalue_gold = gold * 104.28 #Later adapt value e.g (104.28) based on carat value of gold
+    cashvalue_gold = gold * 105.27 #Later adapt value e.g (104.28) based on carat value of gold
     sum += cashvalue_gold
     
 
 #If gold is the only asset
 def loneasset_gold(cashvalue_gold):
     while True:
-        if (cashvalue_gold >= 9098.07):
+        if (cashvalue_gold >= 9209.26):
             zakat_payable(cashvalue_gold)
             break
 
@@ -102,7 +99,7 @@ def loneasset_gold(cashvalue_gold):
 #Hanafi madhab - nisab market value of silver
 def surplus_wealth():
     global sum
-    nisab_silver = 941.29 #nisab_silver changes
+    nisab_silver = 942.58 #nisab_silver changes
     if (sum >= nisab_silver):
        zakat_payable(sum)
     else:
@@ -113,20 +110,39 @@ def zakat_payable(sum):
     zakat_pay = sum * 0.025 
     print("The amount of Zakat due for you to pay is ", round(zakat_pay))
     pass
-    
-    
+
+#Calculate zakat on agricultural products    
+def agric_zakat(harvest):
+   irrigation = input("Please enter method of irrigation used to harvest")
+   while True: 
+       if irrigation.casefold() == "natural":
+           zakat_agric = harvest * 0.10
+           print("Zakat due on argicultural produce is ", zakat_agric)
+           break
+
+       elif irrigation.casefold() == "artificial":
+           zakat_agric = harvest * 0.05
+           print("Zakat due on argicultural produce is ", zakat_agric)
+           break
+
+       elif irrigation.casefold() == "mixed":
+           zakat_agric = harvest * 0.075
+           print("Zakat due on argicultural produce is ", zakat_agric)
+           break
+        
 
 
 #Run
-#cash_savings()
+cash_savings()
 ##gold()
 #silver()
-#investments()
+investments()
 assets()
 iou()
-agric()
+#crops()
 owing()
 gold_to_cash()
+crops()
 
 #Program handling
 print("Total amount you have is: ", round(sum, 2))
