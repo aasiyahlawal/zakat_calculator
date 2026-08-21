@@ -15,18 +15,6 @@ def cash_savings():
     sum += cashsav
         
 
-#Silver
-def silver():
-    global sum
-    silver = int(input("Please enter total grams of silver weight you own: "))
-    while True:
-        if (silver < 612.36):
-            print("Your silver is not zakat taxable")
-            break
-        else:
-            sum += silver
-            break
-
 #Investments and stocks
 def investments():
     global sum
@@ -44,26 +32,27 @@ def iou():
     global sum
     iou = int(input("Please enter total amount owed to you: "))
     sum += iou
-
-# Agric produce & livestock
-def crops():
-    global sum
-    harvest = int(input("Please enter total amount of harvest yielded in kg: "))
-    while True:
-        if (harvest >= 612):
-            agric_zakat(harvest)
-            break
-        elif (harvest < 612):
-           print("Your crops are not Zakat eligible")
-           break
-        else:
-            break
         
 # Money u owe
 def owing():
     global sum
     owing = int(input("How much money are you owing: "))
     sum -= owing
+
+#Silver
+def silver():
+    global sum
+    silver = int(input("Please enter total grams of silver weight you own: "))
+    
+    while True:
+        if (silver < 612.36 and sum == 0): #612.36 is the nisab of silver
+            print("Your silver is not zakat taxable")
+            break
+        else:
+            cashvalue_silver = silver * 1.64
+            sum += cashvalue_silver
+            break
+    
         
 #Updated Gold function
 def gold_to_cash():
@@ -95,7 +84,6 @@ def loneasset_gold(cashvalue_gold):
             zakat_payable(cashvalue_gold)
             break
 
-
 #Hanafi madhab - nisab market value of silver
 def surplus_wealth():
     global sum
@@ -107,27 +95,49 @@ def surplus_wealth():
 
 #Calculate zakat amount eg 2.5%
 def zakat_payable(sum):
-    zakat_pay = sum * 0.025 
+    zakat_pay = sum * 0.025
+    print("*************************************************")
     print("The amount of Zakat due for you to pay is ", round(zakat_pay))
+    print("*************************************************")
     pass
+
+# Agric produce & livestock
+def crops():
+    global sum
+    harvest = int(input("Please enter total amount of harvest yielded in kg: "))
+    while True:
+        if (harvest >= 612):
+            agric_zakat(harvest)
+            break
+        elif (harvest < 612):
+           print("Your crops are not Zakat eligible")
+           break
+        else:
+            break
 
 #Calculate zakat on agricultural products    
 def agric_zakat(harvest):
-   irrigation = input("Please enter method of irrigation used to harvest")
+   irrigation = input("Please enter method of irrigation used to harvest: ")
    while True: 
        if irrigation.casefold() == "natural":
            zakat_agric = harvest * 0.10
+           print("*************************************************")
            print("Zakat due on argicultural produce is ", zakat_agric)
+           print("*************************************************")
            break
 
        elif irrigation.casefold() == "artificial":
            zakat_agric = harvest * 0.05
+           print("*************************************************")
            print("Zakat due on argicultural produce is ", zakat_agric)
+           print("*************************************************")
            break
 
        elif irrigation.casefold() == "mixed":
            zakat_agric = harvest * 0.075
+           print("*************************************************")
            print("Zakat due on argicultural produce is ", zakat_agric)
+           print("*************************************************")
            break
         
 
@@ -135,16 +145,16 @@ def agric_zakat(harvest):
 #Run
 cash_savings()
 ##gold()
-#silver()
 investments()
 assets()
 iou()
-#crops()
 owing()
+silver()
 gold_to_cash()
-crops()
 
 #Program handling
 print("Total amount you have is: ", round(sum, 2))
 
 surplus_wealth()
+crops()
+
