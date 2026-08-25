@@ -42,16 +42,12 @@ def owing():
 #Silver
 def silver():
     global sum
+    global cashvalue_silver
     silver = int(input("Please enter total grams of silver weight you own: "))
+    cashvalue_silver = silver * 1.59
+    sum += cashvalue_silver
     
-    while True:
-        if (silver < 612.36 and sum == 0): #612.36 is the nisab of silver
-            print("Your silver is not zakat taxable")
-            break
-        else:
-            cashvalue_silver = silver * 1.64
-            sum += cashvalue_silver
-            break
+    
     
         
 #Updated Gold function
@@ -73,7 +69,7 @@ def gold_to_cash():
         else:
             break
             
-    cashvalue_gold = gold * 105.27 #Later adapt value e.g (104.28) based on carat value of gold
+    cashvalue_gold = gold * 108.71 #Later adapt value e.g (104.28) based on carat value of gold
     sum += cashvalue_gold
     
 
@@ -87,9 +83,12 @@ def loneasset_gold(cashvalue_gold):
 #Hanafi madhab - nisab market value of silver
 def surplus_wealth():
     global sum
-    nisab_silver = 942.58 #nisab_silver changes
+    global cashvalue_silver
+    nisab_silver = 974.47 #gbp of nisab_silver
     if (sum >= nisab_silver):
        zakat_payable(sum)
+    elif (sum == cashvalue_silver and sum < nisab_silver):
+         print("Your silver is not zakat taxable")
     else:
         print("The total amount of wealth you have is NOT Zakat payable")
 
@@ -109,7 +108,9 @@ def crops():
         if (harvest >= 612):
             agric_zakat(harvest)
             break
-        elif (harvest < 612):
+        elif (harvest == 0):
+            break
+        elif (harvest > 0 and harvest < 612):
            print("Your crops are not Zakat eligible")
            break
         else:
