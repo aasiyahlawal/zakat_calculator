@@ -11,6 +11,10 @@ headers = {
     
 }
 
+#URL's for Gold and Silver values
+gold_url = "https://www.goldapi.io/api/XAU/GBP"
+silver_url = "https://www.goldapi.io/api/XAG/GBP" 
+
 print("Welcome to the Zakat Calculator")
 sum = 0
 
