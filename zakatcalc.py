@@ -2,6 +2,8 @@
 import os
 import requests
 from dotenv import load_dotenv
+
+#API set-up
 load_dotenv() #loads .env file which contains the API Key
 
 api_key = os.getenv("Gold_API_KEY") #Get's api key from .env file & assigns it to variable api_key
@@ -13,7 +15,19 @@ headers = {
 
 #URL's for Gold and Silver values
 gold_url = "https://www.goldapi.io/api/XAU/GBP"
-silver_url = "https://www.goldapi.io/api/XAG/GBP" 
+silver_url = "https://www.goldapi.io/api/XAG/GBP"
+
+gold_response = requests.get(gold_url, headers=headers)
+silver_response = requests.get(silver_url, headers=headers)
+
+gold_data = gold_response.json()
+silver_data = silver_response.json()
+
+#Data of Gold from API
+price_gold = gold_data["price_gram_24k"]
+
+#Data of Silver from API
+silver_price = silver_data["price_gram_24k"]
 
 print("Welcome to the Zakat Calculator")
 sum = 0
