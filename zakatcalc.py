@@ -1,4 +1,15 @@
 #Zakat Calculator
+import os
+import requests
+from dotenv import load_dotenv
+load_dotenv() #loads .env file which contains the API Key
+
+api_key = os.getenv("Gold_API_KEY") #Get's api key from .env file & assigns it to variable api_key
+
+headers = {
+    "x-access-token": api_key
+    
+}
 
 print("Welcome to the Zakat Calculator")
 sum = 0
