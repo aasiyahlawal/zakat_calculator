@@ -62,7 +62,7 @@ def gold_to_cash():
             break
         
         elif (gold >= nisab_gold and sum == 0):
-            cashvalue_gold = gold * 105.27
+            cashvalue_gold = gold * 105.27 #105.27 is the value of gold per gram
             loneasset_gold(cashvalue_gold)
             break
         
@@ -76,7 +76,7 @@ def gold_to_cash():
 #If gold is the only asset
 def loneasset_gold(cashvalue_gold):
     while True:
-        if (cashvalue_gold >= 9209.26):
+        if (cashvalue_gold >= 9209.26): #9209.26 is the gold value per gram * nisab value of gold
             zakat_payable(cashvalue_gold)
             break
 
