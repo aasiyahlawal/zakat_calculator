@@ -27,7 +27,7 @@ silver_data = silver_response.json()
 price_gold = gold_data["price_gram_24k"]
 
 #Data of Silver from API
-silver_price = silver_data["price_gram_24k"]
+price_silver = silver_data["price_gram_24k"]
 
 print("Welcome to the Zakat Calculator")
 sum = 0
@@ -73,7 +73,7 @@ def silver():
     global sum
     global cashvalue_silver
     silver = int(input("Please enter total grams of silver weight you own: "))
-    cashvalue_silver = silver * 1.59
+    cashvalue_silver = silver * price_silver
     sum += cashvalue_silver
     
     
@@ -91,21 +91,21 @@ def gold_to_cash():
             break
         
         elif (gold >= nisab_gold and sum == 0):
-            cashvalue_gold = gold * 105.27 #105.27 is the value of gold per gram
+            cashvalue_gold = gold * price_gold #price_gold is the value of gold per gram
             loneasset_gold(cashvalue_gold)
             break
         
         else:
             break
             
-    cashvalue_gold = gold * 108.71 #Later adapt value e.g (104.28) based on carat value of gold
+    cashvalue_gold = gold * price_gold 
     sum += cashvalue_gold
     
 
 #If gold is the only asset
 def loneasset_gold(cashvalue_gold):
     while True:
-        if (cashvalue_gold >= 9209.26): #9209.26 is the gold value per gram * nisab value of gold
+        if (cashvalue_gold >= (nisab_gold * price_gold)): #nisab_gold * price_gold is the gold value per gram * nisab value of gold
             zakat_payable(cashvalue_gold)
             break
 
@@ -113,7 +113,8 @@ def loneasset_gold(cashvalue_gold):
 def surplus_wealth():
     global sum
     global cashvalue_silver
-    nisab_silver = 974.47 #gbp of nisab_silver
+    nisab_silver = 612.36 * price_silver #£ gbp of nisab_silver
+    
     if (sum >= nisab_silver):
        zakat_payable(sum)
     elif (sum == cashvalue_silver and sum < nisab_silver):
@@ -138,6 +139,7 @@ def crops():
             agric_zakat(harvest)
             break
         elif (harvest == 0):
+            print("Goodbye")
             break
         elif (harvest > 0 and harvest < 612):
            print("Your crops are not Zakat eligible")
