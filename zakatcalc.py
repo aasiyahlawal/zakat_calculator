@@ -32,10 +32,7 @@ price_silver = silver_data["price_gram_24k"]
 print("Welcome to the Zakat Calculator")
 sum = 0
 
-#Notes
-#Later ... will add the option to do different currencies
-#Get API - MetalPriceAPI and link it to program
-#If someone does not own any assets except from Gold, then the nisab value of gold must be used
+#Program start ...
 
 #Cash & Savings
 def cash_savings():
@@ -126,7 +123,7 @@ def surplus_wealth():
 def zakat_payable(sum):
     zakat_pay = sum * 0.025
     print("*************************************************")
-    print("The amount of Zakat due for you to pay is ", round(zakat_pay))
+    print("The amount of Zakat due for you to pay is £", round(zakat_pay))
     print("*************************************************")
     pass
 
@@ -176,7 +173,6 @@ def agric_zakat(harvest):
 
 #Run
 cash_savings()
-##gold()
 investments()
 assets()
 iou()
